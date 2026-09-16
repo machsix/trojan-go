@@ -84,7 +84,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://machsix.github.io/trojan-go/zh/advance/api/</guid>
-      <description>注意，Trojan不支持这个特性 Trojan-Go使用gRPC提供了一组API，API支持以下功能： 用户信息增删改查 流量统计 速度统计 IP连接</description>
+      <description>注意，Trojan不支持这个特性 Trojan-Go使用gRPC提供了一组API，支持用户信息增删改查、流量统计、速度统计和IP连接数统计。T</description>
     </item>
     
     <item>
@@ -94,6 +94,15 @@
       
       <guid>https://machsix.github.io/trojan-go/zh/advance/nat/</guid>
       <description>注意，Trojan不完全支持这个特性（UDP） Trojan-Go支持基于tproxy的透明TCP/UDP代理。 要开启透明代理模式，将一份正确</description>
+    </item>
+    
+    <item>
+      <title>高级TLS设置：指纹、ALPN和ECH</title>
+      <link>https://machsix.github.io/trojan-go/zh/advance/tls/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://machsix.github.io/trojan-go/zh/advance/tls/</guid>
+      <description>本页介绍影响trojan-go客户端与远端通信的TLS层选项：伪造的Client Hello指纹、ALPN列表和ECH（加密客户端问候）模式。</description>
     </item>
     
   </channel>

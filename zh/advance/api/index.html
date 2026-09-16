@@ -12,20 +12,20 @@
     <title>使用API动态管理用户 :: Trojan-Go 文档</title>
 
     
-    <link href="/trojan-go/css/nucleus.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/fontawesome-all.min.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/hybrid.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/featherlight.min.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/perfect-scrollbar.min.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/auto-complete.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/atom-one-dark-reasonable.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/theme.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/tabs.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/hugo-theme.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/nucleus.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/fontawesome-all.min.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/hybrid.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/featherlight.min.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/perfect-scrollbar.min.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/auto-complete.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/atom-one-dark-reasonable.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/theme.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/tabs.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/hugo-theme.css?1789533045" rel="stylesheet">
     
     
 
-    <script src="/trojan-go/js/jquery-3.3.1.min.js?1789530367"></script>
+    <script src="/trojan-go/js/jquery-3.3.1.min.js?1789533045"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/trojan-go/js/lunr.min.js?1789530367"></script>
-<script type="text/javascript" src="/trojan-go/js/auto-complete.js?1789530367"></script>
+<script type="text/javascript" src="/trojan-go/js/lunr.min.js?1789533045"></script>
+<script type="text/javascript" src="/trojan-go/js/auto-complete.js?1789533045"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/machsix.github.io\/trojan-go\/\/zh";
     
 </script>
-<script type="text/javascript" src="/trojan-go/js/search.js?1789530367"></script>
+<script type="text/javascript" src="/trojan-go/js/search.js?1789533045"></script>
 
     
   </div>
@@ -407,6 +407,27 @@
       <li data-nav-id="/trojan-go/zh/advance/nat/" title="透明代理" class="dd-item ">
         <a href="/trojan-go/zh/advance/nat/">
         透明代理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/tls/" title="高级TLS设置：指纹、ALPN和ECH" class="dd-item ">
+        <a href="/trojan-go/zh/advance/tls/">
+        高级TLS设置：指纹、ALPN和ECH
         
         </a>
     </li>
@@ -794,82 +815,76 @@
 
 
 <h3 id="注意trojan不支持这个特性">注意，Trojan不支持这个特性</h3>
-<p>Trojan-Go使用gRPC提供了一组API，API支持以下功能：</p>
-<ul>
-<li>
-<p>用户信息增删改查</p>
-</li>
-<li>
-<p>流量统计</p>
-</li>
-<li>
-<p>速度统计</p>
-</li>
-<li>
-<p>IP连接数统计</p>
-</li>
-</ul>
-<p>Trojan-Go本身集成了API控制功能，也即可以使用一个Trojan-Go实例控制另一个Trojan-Go服务器。</p>
-<p>你需要在你需要被控制的服务端配置添加API设置，例如：</p>
+<p>Trojan-Go使用gRPC提供了一组API，支持用户信息增删改查、流量统计、速度统计和IP连接数统计。Trojan-Go本身集成了API控制功能，也即可以使用一个Trojan-Go实例控制另一个Trojan-Go服务器。</p>
+<p>需要在被控制服务端的配置中添加API设置，例如：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
     <span style="color:#960050;background-color:#1e0010">...</span>
     <span style="color:#f92672">&#34;api&#34;</span>: {
         <span style="color:#f92672">&#34;enabled&#34;</span>: <span style="color:#66d9ef">true</span>,
         <span style="color:#f92672">&#34;api_addr&#34;</span>: <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>,
         <span style="color:#f92672">&#34;api_port&#34;</span>: <span style="color:#ae81ff">10000</span>,
+        <span style="color:#f92672">&#34;allow_payload_capture&#34;</span>: <span style="color:#66d9ef">false</span>
     }
 }
-</code></pre></div><p>然后启动Trojan-Go服务器</p>
+</code></pre></div><p><code>allow_payload_capture</code>默认为<code>false</code>，生产环境应保持该值。它仅在使用<code>apidebug</code>构建标签编译的二进制中生效；默认发布版本会将<code>GetRecords</code>中<code>IncludePayload=true</code>的请求降级为只输出元数据，因此生产脚本不会意外泄露连接字节。使用<code>apidebug</code>构建且此项为<code>false</code>时，<code>GetRecords</code>会返回<code>PermissionDenied</code>，以明确提示配置错误。</p>
+<p>当<code>api_addr</code>绑定到非回环地址时，如果没有启用TLS，或启用了TLS但<code>verify_client</code>为关闭状态，trojan-go会在启动时分别记录<code>WARN</code>。程序不会拒绝启动，以保留私有网络中的既有部署；但任何暴露到互联网的管理API均应使用mTLS保护，否则其中的明文gRPC和管理命令可被读取。</p>
+<p>启动Trojan-Go服务器：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -config ./server.json
-</code></pre></div><p>然后可以使用另一个Trojan-Go连接该服务器进行管理，基本命令格式为</p>
+</code></pre></div><p>再使用另一个Trojan-Go连接服务器进行管理，基本命令格式为：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr SERVER_API_ADDRESS -api COMMAND
-</code></pre></div><p>其中<code>SERVER_API_ADDRESS</code>为API地址和端口，如127.0.0.1:10000</p>
-<p><code>COMMAND</code>为API命令，合法的命令有</p>
+</code></pre></div><p>其中<code>SERVER_API_ADDRESS</code>为API地址和端口，例如<code>127.0.0.1:10000</code>。<code>COMMAND</code>可为：</p>
 <ul>
-<li>
-<p>list 列出所有用户</p>
-</li>
-<li>
-<p>get 获取某个用户信息</p>
-</li>
-<li>
-<p>set 设置某个用户信息（添加/删除/修改）</p>
-</li>
+<li><code>list</code>：列出所有用户</li>
+<li><code>get</code>：获取某个用户信息</li>
+<li><code>set</code>：设置用户信息（添加、删除或修改）</li>
 </ul>
-<p>下面是一些例子</p>
+<p>下面是一些例子。</p>
 <ol>
 <li>
 <p>列出所有用户信息</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api list
-</code></pre></div><p>所有的用户信息将以json的形式导出，信息包括在线IP数量，实时速度，总上传和下载流量等。下面是一个返回的结果的例子</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[{<span style="color:#f92672">&#34;user&#34;</span>:{<span style="color:#f92672">&#34;hash&#34;</span>:<span style="color:#e6db74">&#34;d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01&#34;</span>},<span style="color:#f92672">&#34;status&#34;</span>:{<span style="color:#f92672">&#34;traffic_total&#34;</span>:{<span style="color:#f92672">&#34;upload_traffic&#34;</span>:<span style="color:#ae81ff">36393</span>,<span style="color:#f92672">&#34;download_traffic&#34;</span>:<span style="color:#ae81ff">186478</span>},<span style="color:#f92672">&#34;speed_current&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">25210</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">72384</span>},<span style="color:#f92672">&#34;speed_limit&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>},<span style="color:#f92672">&#34;ip_limit&#34;</span>:<span style="color:#ae81ff">50</span>}}]
-</code></pre></div><p>流量单位均为字节。</p>
+</code></pre></div><p>返回JSON格式的用户信息，其中包括在线IP数、实时速度、总上传/下载流量等：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[{<span style="color:#f92672">&#34;user&#34;</span>:{<span style="color:#f92672">&#34;hash&#34;</span>:<span style="color:#e6db74">&#34;d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01&#34;</span>},<span style="color:#f92672">&#34;status&#34;</span>:{<span style="color:#f92672">&#34;traffic_total&#34;</span>:{<span style="color:#f92672">&#34;upload_traffic&#34;</span>:<span style="color:#ae81ff">36393</span>,<span style="color:#f92672">&#34;download_traffic&#34;</span>:<span style="color:#ae81ff">186478</span>},<span style="color:#f92672">&#34;speed_current&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">25210</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">72384</span>},<span style="color:#f92672">&#34;speed_limit&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>},<span style="color:#f92672">&#34;ip_limit&#34;</span>:<span style="color:#ae81ff">50</span>,<span style="color:#f92672">&#34;quota&#34;</span>:<span style="color:#ae81ff">10737418240</span>}}]
+</code></pre></div><p>流量单位均为字节。<code>quota</code>为流量配额：负数表示不限额，<code>0</code>表示禁用用户，正数表示字节限额。</p>
 </li>
 <li>
-<p>获取一个用户信息</p>
-<p>可以使用 -target-password 指定密码，也可以使用 -target-hash 指定目标用户密码的SHA224散列值。格式和list命令相同</p>
+<p>获取一个用户的信息</p>
+<p>可用<code>-target-password</code>指定密码，或用<code>-target-hash</code>指定目标用户密码的SHA224散列值：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api get -target-password password
-</code></pre></div><p>或者</p>
+</code></pre></div><p>或：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api get -target-hash d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01
-</code></pre></div><p>以上两条命令等价，下面的例子统一使用明文密码的方式，散列值指定某个用户的方式以此类推。</p>
-<p>该用户信息将以json的形式导出，格式与list命令类似。下面是一个返回的结果的例子</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">&#34;user&#34;</span>:{<span style="color:#f92672">&#34;hash&#34;</span>:<span style="color:#e6db74">&#34;d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01&#34;</span>},<span style="color:#f92672">&#34;status&#34;</span>:{<span style="color:#f92672">&#34;traffic_total&#34;</span>:{<span style="color:#f92672">&#34;upload_traffic&#34;</span>:<span style="color:#ae81ff">36393</span>,<span style="color:#f92672">&#34;download_traffic&#34;</span>:<span style="color:#ae81ff">186478</span>},<span style="color:#f92672">&#34;speed_current&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">25210</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">72384</span>},<span style="color:#f92672">&#34;speed_limit&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>},<span style="color:#f92672">&#34;ip_limit&#34;</span>:<span style="color:#ae81ff">50</span>}}
+</code></pre></div><p>两条命令等价。返回格式与<code>list</code>类似：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">&#34;user&#34;</span>:{<span style="color:#f92672">&#34;hash&#34;</span>:<span style="color:#e6db74">&#34;d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01&#34;</span>},<span style="color:#f92672">&#34;status&#34;</span>:{<span style="color:#f92672">&#34;traffic_total&#34;</span>:{<span style="color:#f92672">&#34;upload_traffic&#34;</span>:<span style="color:#ae81ff">36393</span>,<span style="color:#f92672">&#34;download_traffic&#34;</span>:<span style="color:#ae81ff">186478</span>},<span style="color:#f92672">&#34;speed_current&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">25210</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">72384</span>},<span style="color:#f92672">&#34;speed_limit&#34;</span>:{<span style="color:#f92672">&#34;upload_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>,<span style="color:#f92672">&#34;download_speed&#34;</span>:<span style="color:#ae81ff">5242880</span>},<span style="color:#f92672">&#34;ip_limit&#34;</span>:<span style="color:#ae81ff">50</span>,<span style="color:#f92672">&#34;quota&#34;</span>:<span style="color:#ae81ff">10737418240</span>}}
 </code></pre></div></li>
 <li>
-<p>添加一个用户信息</p>
+<p>添加用户</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api set -add-profile -target-password password
 </code></pre></div></li>
 <li>
-<p>删除一个用户信息</p>
+<p>删除用户</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api set -delete-profile -target-password password
 </code></pre></div></li>
 <li>
-<p>修改一个用户信息</p>
+<p>修改用户信息</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api set -modify-profile -target-password password <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    -ip-limit <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    -upload-speed-limit <span style="color:#ae81ff">5242880</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -download-speed-limit <span style="color:#ae81ff">5242880</span>
-</code></pre></div><p>这个命令将密码为password的用户上传和下载速度限制为5MiB/s，同时连接的IP数量限制为3个，注意这里5242880的单位是字节。如果填写0或者负数，则表示不进行限制。</p>
+</span><span style="color:#ae81ff"></span>    -download-speed-limit <span style="color:#ae81ff">5242880</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -quota <span style="color:#ae81ff">10737418240</span>
+</code></pre></div><p>此命令将密码为<code>password</code>的用户上传和下载速度限制为5 MiB/s，同时连接IP数限制为3，并将流量配额设置为10 GiB（10737418240字节）。速度单位为字节/秒；速度或IP数量为0或负数时表示不限制。</p>
+<p>CLI会区分“未传入参数”和“显式传入零值”。只有实际出现在命令行中的参数才会发送到服务端，未提及的字段会保持原值。例如<code>trojan-go -api set -modify-profile -target-password password -ip-limit 3</code>不会把该用户已有的配额清零；<code>quota</code>字段根本不会出现在请求中。</p>
+</li>
+<li>
+<p>管理用户配额</p>
+<p>可从<code>get</code>或<code>list</code>结果的<code>quota</code>字段读取配额。使用CLI设置或修改配额：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./trojan-go -api-addr 127.0.0.1:10000 -api set -modify-profile -target-password password -quota <span style="color:#ae81ff">10737418240</span>
+</code></pre></div><p>该命令将配额设为10 GiB（10737418240字节）。语义如下：</p>
+<ul>
+<li><strong>负数</strong>（通常为<code>-1</code>）：不限额。新建用户默认值为<code>-1</code>，因此YAML/JSON配置中的静态<code>password</code>列表仍可认证。</li>
+<li><strong><code>0</code></strong>：禁用用户，认证将被拒绝，已有隧道也会通过该用户的截止信号关闭。</li>
+<li><strong>正数</strong>：字节限额。一旦<code>download + upload &gt;= quota</code>，用户的活动隧道会在越过阈值后约一秒内关闭，而非等到下一次轮询。</li>
+</ul>
+<p>在线路协议中，proto3的<code>quota</code>字段为<code>optional int64</code>，因此调用方可区分“字段缺失”（保留原值）和“字段为<code>0</code>”（显式禁用）。添加用户时省略配额会使用默认<code>-1</code>；显式<code>quota=0</code>会禁用用户。修改时省略配额会保留旧值；显式<code>quota=0</code>会禁用用户。CLI用<code>flag.Visit</code>实施相同约定，仅在命令行传入<code>-quota</code>时发送该字段。下游Go gRPC使用者应重新生成桩代码：<code>UserStatus.Quota</code>现为<code>*int64</code>，并提供标准的<code>GetQuota()</code>访问器。</p>
 </li>
 </ol>
 
@@ -1152,6 +1167,22 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1337,19 +1368,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/trojan-go/js/clipboard.min.js?1789530367"></script>
-    <script src="/trojan-go/js/perfect-scrollbar.min.js?1789530367"></script>
-    <script src="/trojan-go/js/perfect-scrollbar.jquery.min.js?1789530367"></script>
-    <script src="/trojan-go/js/jquery.sticky.js?1789530367"></script>
-    <script src="/trojan-go/js/featherlight.min.js?1789530367"></script>
-    <script src="/trojan-go/js/highlight.pack.js?1789530367"></script>
+    <script src="/trojan-go/js/clipboard.min.js?1789533045"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.min.js?1789533045"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.jquery.min.js?1789533045"></script>
+    <script src="/trojan-go/js/jquery.sticky.js?1789533045"></script>
+    <script src="/trojan-go/js/featherlight.min.js?1789533045"></script>
+    <script src="/trojan-go/js/highlight.pack.js?1789533045"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/trojan-go/js/modernizr.custom-3.6.0.js?1789530367"></script>
-    <script src="/trojan-go/js/learn.js?1789530367"></script>
-    <script src="/trojan-go/js/hugo-learn.js?1789530367"></script>
+    <script src="/trojan-go/js/modernizr.custom-3.6.0.js?1789533045"></script>
+    <script src="/trojan-go/js/learn.js?1789533045"></script>
+    <script src="/trojan-go/js/hugo-learn.js?1789533045"></script>
     
         
-            <script src="/trojan-go/mermaid/mermaid.js?1789530367"></script>
+            <script src="/trojan-go/mermaid/mermaid.js?1789533045"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

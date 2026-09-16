@@ -158,6 +158,18 @@
                 href="https://machsix.github.io/trojan-go/zh/advance/nat/"
                 />
   </url><url>
+    <loc>https://machsix.github.io/trojan-go/zh/advance/tls/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://machsix.github.io/trojan-go/en/advance/tls/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://machsix.github.io/trojan-go/zh/advance/tls/"
+                />
+  </url><url>
     <loc>https://machsix.github.io/trojan-go/zh/developer/trojan/</loc>
     <xhtml:link
                 rel="alternate"

@@ -12,20 +12,20 @@
     <title>一种基于SNI代理的多路径分流中继方案 :: Trojan-Go 文档</title>
 
     
-    <link href="/trojan-go/css/nucleus.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/fontawesome-all.min.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/hybrid.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/featherlight.min.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/perfect-scrollbar.min.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/auto-complete.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/atom-one-dark-reasonable.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/theme.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/tabs.css?1789530367" rel="stylesheet">
-    <link href="/trojan-go/css/hugo-theme.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/nucleus.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/fontawesome-all.min.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/hybrid.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/featherlight.min.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/perfect-scrollbar.min.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/auto-complete.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/atom-one-dark-reasonable.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/theme.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/tabs.css?1789533045" rel="stylesheet">
+    <link href="/trojan-go/css/hugo-theme.css?1789533045" rel="stylesheet">
     
     
 
-    <script src="/trojan-go/js/jquery-3.3.1.min.js?1789530367"></script>
+    <script src="/trojan-go/js/jquery-3.3.1.min.js?1789533045"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/trojan-go/js/lunr.min.js?1789530367"></script>
-<script type="text/javascript" src="/trojan-go/js/auto-complete.js?1789530367"></script>
+<script type="text/javascript" src="/trojan-go/js/lunr.min.js?1789533045"></script>
+<script type="text/javascript" src="/trojan-go/js/auto-complete.js?1789533045"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/machsix.github.io\/trojan-go\/\/zh";
     
 </script>
-<script type="text/javascript" src="/trojan-go/js/search.js?1789530367"></script>
+<script type="text/javascript" src="/trojan-go/js/search.js?1789533045"></script>
 
     
   </div>
@@ -407,6 +407,27 @@
       <li data-nav-id="/trojan-go/zh/advance/nat/" title="透明代理" class="dd-item ">
         <a href="/trojan-go/zh/advance/nat/">
         透明代理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/tls/" title="高级TLS设置：指纹、ALPN和ECH" class="dd-item ">
+        <a href="/trojan-go/zh/advance/tls/">
+        高级TLS设置：指纹、ALPN和ECH
         
         </a>
     </li>
@@ -773,6 +794,12 @@
         <li><a href="#配置落地-trojan-服务">配置落地 Trojan 服务</a></li>
       </ul>
     </li>
+    <li><a href="#保留真实客户端-ipproxy-protocol">保留真实客户端 IP（PROXY Protocol）</a>
+      <ul>
+        <li><a href="#nginx-配置">nginx 配置</a></li>
+        <li><a href="#trojan-go-配置">trojan-go 配置</a></li>
+      </ul>
+    </li>
     <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
@@ -873,6 +900,39 @@ Trojan 的配置和通常配置方法无异，这里还是提供一份例子。�
     <span style="color:#960050;background-color:#1e0010">...</span>
 }
 </code></pre></div><p>小提示：如果需要在落地主机上对不同路径分别使用独立的 Trojan 服务端（比如需要分别接入各自的计费服务），可以在落地机上再配置一个 SNI 代理，并分别转发至本地不同的 Trojan 服务端监听端口。由于配置与前面所提到的过程基本相同，这里便不再赘述。</p>
+<h2 id="保留真实客户端-ipproxy-protocol">保留真实客户端 IP（PROXY Protocol）</h2>
+<p>当trojan-go部署在nginx SNI代理之后，所有入站连接看起来都会来自<code>127.0.0.1</code>（或nginx连接所使用的地址）。这会使<code>ip_limit</code>等依赖客户端IP的服务端功能失效，因为所有客户端会被视为同一个IP。</p>
+<p>要解决此问题，请启用 <strong>PROXY Protocol</strong>。nginx会在每个被代理连接前加上携带真实客户端IP的PROXY Protocol头，trojan-go会读取该头。</p>
+<h3 id="nginx-配置">nginx 配置</h3>
+<p>在<code>server</code>块中加入<code>proxy_protocol on;</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">stream</span> {
+  <span style="color:#f92672">map</span> $ssl_preread_server_name $name {
+    <span style="color:#f92672">a-c.example.com</span>   <span style="color:#e6db74">c.example.com</span>;
+    <span style="color:#f92672">a-d.example.com</span>   <span style="color:#e6db74">d.example.com</span>;
+    <span style="color:#f92672">default</span>           localhost:<span style="color:#ae81ff">4000</span>;
+  }
+
+  <span style="color:#f92672">server</span> {
+    <span style="color:#f92672">listen</span>      <span style="color:#ae81ff">443</span>;
+    <span style="color:#f92672">proxy_pass</span>  $name;
+    <span style="color:#f92672">proxy_protocol</span> <span style="color:#66d9ef">on</span>;
+    <span style="color:#f92672">ssl_preread</span> <span style="color:#66d9ef">on</span>;
+  }
+}
+</code></pre></div><h3 id="trojan-go-配置">trojan-go 配置</h3>
+<p>在服务端配置的<code>tcp</code>段加入<code>proxy_protocol</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;run_type&#34;</span>: <span style="color:#e6db74">&#34;server&#34;</span>,
+  <span style="color:#f92672">&#34;local_addr&#34;</span>: <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>,
+  <span style="color:#f92672">&#34;local_port&#34;</span>: <span style="color:#ae81ff">8443</span>,
+  <span style="color:#960050;background-color:#1e0010">...</span>
+  <span style="color:#f92672">&#34;tcp&#34;</span>: {
+    <span style="color:#f92672">&#34;proxy_protocol&#34;</span>: <span style="color:#66d9ef">true</span>
+  }
+}
+</code></pre></div><blockquote>
+<p>**警告：**仅当所有到trojan-go的连接均来自会发送PROXY Protocol头的可信代理时才启用<code>proxy_protocol</code>。如果trojan-go也直接暴露在互联网中，不可信客户端可伪造PROXY Protocol头以伪造其IP。</p>
+</blockquote>
 <h2 id="总结">总结</h2>
 <p>通过以上介绍的配置方法，我们可以在单一端口上实现多入口多出口多级中继的 Trojan 流量转发。<br>
 对于多级中继，只需在中间节点上按相同思路配置 SNI 代理即可。</p>
@@ -1156,6 +1216,22 @@ Trojan 的配置和通常配置方法无异，这里还是提供一份例子。�
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1341,19 +1417,19 @@ Trojan 的配置和通常配置方法无异，这里还是提供一份例子。�
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/trojan-go/js/clipboard.min.js?1789530367"></script>
-    <script src="/trojan-go/js/perfect-scrollbar.min.js?1789530367"></script>
-    <script src="/trojan-go/js/perfect-scrollbar.jquery.min.js?1789530367"></script>
-    <script src="/trojan-go/js/jquery.sticky.js?1789530367"></script>
-    <script src="/trojan-go/js/featherlight.min.js?1789530367"></script>
-    <script src="/trojan-go/js/highlight.pack.js?1789530367"></script>
+    <script src="/trojan-go/js/clipboard.min.js?1789533045"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.min.js?1789533045"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.jquery.min.js?1789533045"></script>
+    <script src="/trojan-go/js/jquery.sticky.js?1789533045"></script>
+    <script src="/trojan-go/js/featherlight.min.js?1789533045"></script>
+    <script src="/trojan-go/js/highlight.pack.js?1789533045"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/trojan-go/js/modernizr.custom-3.6.0.js?1789530367"></script>
-    <script src="/trojan-go/js/learn.js?1789530367"></script>
-    <script src="/trojan-go/js/hugo-learn.js?1789530367"></script>
+    <script src="/trojan-go/js/modernizr.custom-3.6.0.js?1789533045"></script>
+    <script src="/trojan-go/js/learn.js?1789533045"></script>
+    <script src="/trojan-go/js/hugo-learn.js?1789533045"></script>
     
         
-            <script src="/trojan-go/mermaid/mermaid.js?1789530367"></script>
+            <script src="/trojan-go/mermaid/mermaid.js?1789533045"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

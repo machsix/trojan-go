@@ -147,6 +147,16 @@
                 />
   </url><url>
     <loc>https://machsix.github.io/trojan-go/en/advance/tls/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://machsix.github.io/trojan-go/zh/advance/tls/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://machsix.github.io/trojan-go/en/advance/tls/"
+                />
   </url><url>
     <loc>https://machsix.github.io/trojan-go/en/advance/nat/</loc>
     <xhtml:link

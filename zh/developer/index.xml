@@ -21,7 +21,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://machsix.github.io/trojan-go/zh/developer/build/</guid>
-      <description>编译需要Go版本号高于1.14.x，请在编译前确认你的编译器版本。推荐使用snap安装和更新go。 编译方式非常简单，可以使用Makefile</description>
+      <description>编译需要Go版本号高于1.26，请在编译前确认你的编译器版本。推荐使用snap安装和更新go。 编译方式非常简单，可以使用Makefile预设</description>
     </item>
     
     <item>
