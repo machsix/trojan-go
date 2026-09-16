@@ -58,7 +58,7 @@ jobs:
             -o "dist/${TARGET}/trojan-go"
 
       - name: Upload binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.target }}
           path: dist/${{ matrix.target }}/trojan-go
@@ -77,7 +77,7 @@ jobs:
           curl --fail --location https://github.com/v2fly/geoip/raw/release/geoip-only-cn-private.dat --output dist/runtime-data/geoip-only-cn-private.dat
 
       - name: Upload runtime data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: runtime-data
           path: dist/runtime-data
@@ -94,7 +94,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           path: dist
 
