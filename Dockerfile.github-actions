@@ -1,0 +1,10 @@
+FROM alpine
+ARG TARGETARCH
+ARG TARGETVARIANT
+RUN apk add --no-cache tzdata ca-certificates
+COPY --chmod=755 dist/linux-${TARGETARCH}${TARGETVARIANT}/trojan-go /usr/local/bin/trojan-go
+COPY dist/runtime-data/ /usr/local/bin/
+COPY example/server.json /etc/trojan-go/config.json
+
+ENTRYPOINT ["/usr/local/bin/trojan-go", "-config"]
+CMD ["/etc/trojan-go/config.json"]

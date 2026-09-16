@@ -2,8 +2,10 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - "v*.*.*"
+      - "**"
 name: release-build
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,20 +21,50 @@ jobs:
       - name: Checkout tag
         run: |
           git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-          tag_name="${GITHUB_REF##*/}"
+          tag_name="${GITHUB_REF#refs/tags/}"
           echo Tag $tag_name
-          git checkout $tag_name
+          git checkout --detach "$tag_name"
           echo "TAG_NAME=${tag_name}" >> $GITHUB_ENV
 
       - name: Build
         run: |
           make release -j$(nproc)
 
-      - name: Release
+      - name: Prepare raw binary assets
+        run: |
+          mkdir -p release-binaries
+          shopt -s nullglob
+          binaries=(build/*/trojan-go build/*/trojan-go.exe)
+          if (( ${#binaries[@]} == 0 )); then
+            echo "No release binaries found" >&2
+            exit 1
+          fi
+          for binary in "${binaries[@]}"; do
+            platform="${binary#build/}"
+            platform="${platform%/*}"
+            extension=""
+            if [[ "$binary" == *.exe ]]; then
+              extension=".exe"
+            fi
+            cp "$binary" "release-binaries/trojan-go-${platform}${extension}"
+          done
+
+      - name: Upload ZIP archives to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.TAG_NAME }}
           file: ./trojan-go-*.zip
           file_glob: true
+          overwrite: true
+          prerelease: true
+
+      - name: Upload raw binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.TAG_NAME }}
+          file: ./release-binaries/*
+          file_glob: true
+          overwrite: true
           prerelease: true
