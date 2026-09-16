@@ -1,25 +1,38 @@
-baseURL = "https://kis1yi.github.io/trojan-go"
+baseURL = "https://machsix.github.io/trojan-go/"
 
-languageCode = "zh-CN"
+languageCode = "en-US"
 title = "Trojan-Go Docs"
-theme = "hugo-theme-techdoc"
+theme = "hugo-theme-learn"
 
 hasCJKLanguage = true
 metaDataFormat = "yaml"
 
-defaultContentLanguage = "zh"
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir= true
 enableMissingTranslationPlaceholders = false
+
+[languages]
+    [languages.en]
+        title = "Trojan-Go Docs"
+        languageName = "English"
+        contentDir = "content/en"
+        weight = 1
+    [languages.zh]
+        title = "Trojan-Go 文档"
+        languageName = "简体中文"
+        languageCode = "zh-CN"
+        contentDir = "content/zh"
+        weight = 2
 
 [params]
 
     # Source Code repository section
     description = "An unidentifiable mechanism that helps you bypass GFW."
-    github_repository = "https://github.com/kis1yi/trojan-go"
+    github_repository = "https://github.com/machsix/trojan-go"
 
     # Documentation repository section
     # documentation repository (set edit link to documentation repository)
-    github_doc_repository = "https://github.com/kis1yi/trojan-go/docs"
+    github_doc_repository = "https://github.com/machsix/trojan-go/docs"
 
     # Analytic section
     google_analytics_id = "" # Your Google Analytics tracking id
@@ -74,7 +87,7 @@ enableMissingTranslationPlaceholders = false
 
     [[menu.main]]
         name = "GitHub"
-        url = "https://github.com/kis1yi"
+        url = "https://github.com/machsix"
         weight = 2
 
 # Markup configure section

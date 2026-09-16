@@ -15,5 +15,5 @@ hugo:
 hugo-themes:
 	rm -rf themes
 	mkdir themes
-	git clone --depth=1 https://github.com/llc1123/hugo-theme-techdoc.git themes/hugo-theme-techdoc
-	rm -rf themes/hugo-theme-techdoc/.git
+	git clone --depth=1 https://github.com/matcornic/hugo-theme-learn.git themes/hugo-theme-learn
+	rm -rf themes/hugo-theme-learn/.git
