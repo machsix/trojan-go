@@ -118,7 +118,6 @@ jobs:
           tags=(
             "${image}:latest"
             "${image}:$(date -u +%Y%m%d)"
-            "${image}:$(git rev-parse --short=7 "$GITHUB_SHA")"
           )
 
           while IFS= read -r tag; do
@@ -162,3 +161,51 @@ jobs:
       - name: Test docker image
         run: |
           docker run --rm --entrypoint /usr/local/bin/trojan-go ghcr.io/${GITHUB_REPOSITORY,,} -version
+
+  cleanup:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove old rolling image versions
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const packageName = context.repo.repo.toLowerCase();
+            const { data: account } = await github.request('GET /users/{username}', {
+              username: owner,
+            });
+            const isOrganization = account.type === 'Organization';
+            const listRoute = isOrganization
+              ? 'GET /orgs/{org}/packages/{package_type}/{package_name}/versions'
+              : 'GET /users/{username}/packages/{package_type}/{package_name}/versions';
+            const deleteRoute = isOrganization
+              ? 'DELETE /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}'
+              : 'DELETE /users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}';
+            const scope = isOrganization ? { org: owner } : { username: owner };
+            const versions = await github.paginate(listRoute, {
+              ...scope,
+              package_type: 'container',
+              package_name: packageName,
+              per_page: 100,
+            });
+            const releaseTag = /^v\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/;
+            const rollingTag = /^(?:\d{8}|[0-9a-f]{7})$/;
+            const rollingVersions = versions
+              .filter((version) => {
+                const tags = version.metadata?.container?.tags ?? [];
+                return !tags.some((tag) => releaseTag.test(tag)) &&
+                  tags.some((tag) => rollingTag.test(tag));
+              })
+              .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+            const versionsToDelete = rollingVersions.slice(5);
+            core.info(`Keeping ${Math.min(rollingVersions.length, 5)} rolling image versions.`);
+            for (const version of versionsToDelete) {
+              core.info(`Deleting container version ${version.id}: ${version.metadata.container.tags.join(', ')}`);
+              await github.request(deleteRoute, {
+                ...scope,
+                package_type: 'container',
+                package_name: packageName,
+                package_version_id: version.id,
+              });
+            }
