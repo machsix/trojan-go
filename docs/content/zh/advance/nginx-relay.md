@@ -107,6 +107,51 @@ Trojan 的配置和通常配置方法无异，这里还是提供一份例子。�
 
 小提示：如果需要在落地主机上对不同路径分别使用独立的 Trojan 服务端（比如需要分别接入各自的计费服务），可以在落地机上再配置一个 SNI 代理，并分别转发至本地不同的 Trojan 服务端监听端口。由于配置与前面所提到的过程基本相同，这里便不再赘述。
 
+## 保留真实客户端 IP（PROXY Protocol）
+
+当trojan-go部署在nginx SNI代理之后，所有入站连接看起来都会来自```127.0.0.1```（或nginx连接所使用的地址）。这会使```ip_limit```等依赖客户端IP的服务端功能失效，因为所有客户端会被视为同一个IP。
+
+要解决此问题，请启用 **PROXY Protocol**。nginx会在每个被代理连接前加上携带真实客户端IP的PROXY Protocol头，trojan-go会读取该头。
+
+### nginx 配置
+
+在```server```块中加入```proxy_protocol on;```：
+
+```nginx
+stream {
+  map $ssl_preread_server_name $name {
+    a-c.example.com   c.example.com;
+    a-d.example.com   d.example.com;
+    default           localhost:4000;
+  }
+
+  server {
+    listen      443;
+    proxy_pass  $name;
+    proxy_protocol on;
+    ssl_preread on;
+  }
+}
+```
+
+### trojan-go 配置
+
+在服务端配置的```tcp```段加入```proxy_protocol```：
+
+```json
+{
+  "run_type": "server",
+  "local_addr": "127.0.0.1",
+  "local_port": 8443,
+  ...
+  "tcp": {
+    "proxy_protocol": true
+  }
+}
+```
+
+> **警告：**仅当所有到trojan-go的连接均来自会发送PROXY Protocol头的可信代理时才启用```proxy_protocol```。如果trojan-go也直接暴露在互联网中，不可信客户端可伪造PROXY Protocol头以伪造其IP。
+
 ## 总结
 
 通过以上介绍的配置方法，我们可以在单一端口上实现多入口多出口多级中继的 Trojan 流量转发。  
