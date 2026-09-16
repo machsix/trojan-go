@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="zh" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.83.1" />
+    <meta name="description" content="An unidentifiable mechanism that helps you bypass GFW.">
+
+
+    <link rel="icon" href="/trojan-go/images/favicon.png" type="image/png">
+
+    <title>一种基于SNI代理的多路径分流中继方案 :: Trojan-Go 文档</title>
+
+    
+    <link href="/trojan-go/css/nucleus.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/fontawesome-all.min.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/hybrid.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/featherlight.min.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/perfect-scrollbar.min.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/auto-complete.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/atom-one-dark-reasonable.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/theme.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/tabs.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/hugo-theme.css?1789530367" rel="stylesheet">
+    
+    
+
+    <script src="/trojan-go/js/jquery-3.3.1.min.js?1789530367"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/trojan-go/zh/advance/nginx-relay/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/' aria-label="Trojan-Go documentation home">
+  <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="trojan-go-logo-title" style="width: 100%; height: 100%;">
+    <title id="trojan-go-logo-title">trojan-go</title>
+    <text x="160" y="53" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" letter-spacing="-1.5">trojan-go</text>
+  </svg>
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="搜索...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/trojan-go/js/lunr.min.js?1789530367"></script>
+<script type="text/javascript" src="/trojan-go/js/auto-complete.js?1789530367"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/machsix.github.io\/trojan-go\/\/zh";
+    
+</script>
+<script type="text/javascript" src="/trojan-go/js/search.js?1789530367"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='/'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/trojan-go/zh/basic/" title="基本配置" class="dd-item
+        
+        
+        parent
+        ">
+      <a href="/trojan-go/zh/basic/">
+          基本配置
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/basic/trojan/" title="Trojan基本原理" class="dd-item ">
+        <a href="/trojan-go/zh/basic/trojan/">
+        Trojan基本原理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/basic/config/" title="正确配置Trojan-Go" class="dd-item ">
+        <a href="/trojan-go/zh/basic/config/">
+        正确配置Trojan-Go
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/basic/full-config/" title="完整的配置文件" class="dd-item ">
+        <a href="/trojan-go/zh/basic/full-config/">
+        完整的配置文件
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/trojan-go/zh/advance/" title="高级配置" class="dd-item
+        parent
+        
+        parent
+        ">
+      <a href="/trojan-go/zh/advance/">
+          高级配置
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/mux/" title="启用多路复用提升网络并发性能" class="dd-item ">
+        <a href="/trojan-go/zh/advance/mux/">
+        启用多路复用提升网络并发性能
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/websocket/" title="使用Websocket进行CDN转发和抵抗中间人攻击" class="dd-item ">
+        <a href="/trojan-go/zh/advance/websocket/">
+        使用Websocket进行CDN转发和抵抗中间人攻击
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/router/" title="国内直连和广告屏蔽" class="dd-item ">
+        <a href="/trojan-go/zh/advance/router/">
+        国内直连和广告屏蔽
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/forward/" title="隧道和反向代理" class="dd-item ">
+        <a href="/trojan-go/zh/advance/forward/">
+        隧道和反向代理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/nginx-relay/" title="一种基于SNI代理的多路径分流中继方案" class="dd-item active">
+        <a href="/trojan-go/zh/advance/nginx-relay/">
+        一种基于SNI代理的多路径分流中继方案
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/plugin/" title="使用Shadowsocks插件/可插拔传输层" class="dd-item ">
+        <a href="/trojan-go/zh/advance/plugin/">
+        使用Shadowsocks插件/可插拔传输层
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/aead/" title="使用Shadowsocks AEAD进行二次加密" class="dd-item ">
+        <a href="/trojan-go/zh/advance/aead/">
+        使用Shadowsocks AEAD进行二次加密
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/customize-protocol-stack/" title="自定义协议栈" class="dd-item ">
+        <a href="/trojan-go/zh/advance/customize-protocol-stack/">
+        自定义协议栈
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/api/" title="使用API动态管理用户" class="dd-item ">
+        <a href="/trojan-go/zh/advance/api/">
+        使用API动态管理用户
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/nat/" title="透明代理" class="dd-item ">
+        <a href="/trojan-go/zh/advance/nat/">
+        透明代理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/trojan-go/zh/developer/" title="实现细节和开发指南" class="dd-item
+        
+        
+        parent
+        ">
+      <a href="/trojan-go/zh/developer/">
+          实现细节和开发指南
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/overview/" title="基本介绍" class="dd-item ">
+        <a href="/trojan-go/zh/developer/overview/">
+        基本介绍
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/build/" title="编译和自定义Trojan-Go" class="dd-item ">
+        <a href="/trojan-go/zh/developer/build/">
+        编译和自定义Trojan-Go
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/trojan/" title="Trojan协议" class="dd-item ">
+        <a href="/trojan-go/zh/developer/trojan/">
+        Trojan协议
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/mux/" title="多路复用" class="dd-item ">
+        <a href="/trojan-go/zh/developer/mux/">
+        多路复用
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/websocket/" title="Websocket" class="dd-item ">
+        <a href="/trojan-go/zh/developer/websocket/">
+        Websocket
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/simplesocks/" title="SimpleSocks协议" class="dd-item ">
+        <a href="/trojan-go/zh/developer/simplesocks/">
+        SimpleSocks协议
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/api/" title="API开发" class="dd-item ">
+        <a href="/trojan-go/zh/developer/api/">
+        API开发
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/plugin/" title="可插拔传输层插件开发" class="dd-item ">
+        <a href="/trojan-go/zh/developer/plugin/">
+        可插拔传输层插件开发
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/url/" title="URL方案（草案）" class="dd-item ">
+        <a href="/trojan-go/zh/developer/url/">
+        URL方案（草案）
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://machsix.github.io/trojan-go/en/advance/nginx-relay/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="zh" value="https://machsix.github.io/trojan-go/zh/advance/nginx-relay/" selected>简体中文</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/trojan-go/zh/'>简介</a> > <a href='/trojan-go/zh/advance/'>高级配置</a> > 一种基于SNI代理的多路径分流中继方案
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#所需工具及其他准备">所需工具及其他准备</a></li>
+    <li><a href="#配置方法">配置方法</a>
+      <ul>
+        <li><a href="#配置路径域名和相应的证书">配置路径域名和相应的证书</a></li>
+        <li><a href="#配置-sni-代理">配置 SNI 代理</a></li>
+        <li><a href="#配置落地-trojan-服务">配置落地 Trojan 服务</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              一种基于SNI代理的多路径分流中继方案
+            </h1>
+          
+
+        
+
+
+<h2 id="前言">前言</h2>
+<p>Trojan 是一种通过 TLS 封装后进行加密数据传输的工具，利用其 TLS 的特性，我们可以通过 SNI 代理实现在同一主机端口上实现不同路径的分流中继。</p>
+<h2 id="所需工具及其他准备">所需工具及其他准备</h2>
+<ul>
+<li>中继机：nginx 1.11.5 及以上版本</li>
+<li>落地机：trojan 服务端（无版本要求）</li>
+</ul>
+<h2 id="配置方法">配置方法</h2>
+<p>为了便于说明，这里使用了两台中继主机和两台落地主机。<br>
+四台主机所绑定的域名分别为 (a/b/c/d).example.com。如图所示。<br>
+相互连接一共4条路径。分别为 a-c、a-d、b-c、b-d 。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">                        +-----------------+           +--------------------+
+                        |                 +----------&gt;+                    |
+                        |   VPS RELAY A   |           |   VPS ENDPOINT C   |
+                  +----&gt;+                 |   +------&gt;+                    |
+                  |     |  a.example.com  |   |       |   c.example.com    |
+                  |     |                 +------+    |                    |
+  +----------+    |     +-----------------+   |  |    +--------------------+
+  |          |    |                           |  |
+  |  client  +----+                           |  |
+  |          |    |                           |  |
+  +----------+    |     +-----------------+   |  |    +--------------------+
+                  |     |                 |   |  |    |                    |
+                  |     |   VPS RELAY B   |   |  +---&gt;+   VPS ENDPOINT D   |
+                  +----&gt;+                 +---+       |                    |
+                        |  b.example.com  |           |   d.example.com    |
+                        |                 +----------&gt;+                    |
+                        +-----------------+           +--------------------+
+</code></pre></div><h3 id="配置路径域名和相应的证书">配置路径域名和相应的证书</h3>
+<p>首先我们需要将每条路径分别分配一个域名，并使其解析到分别的入口主机上。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">a-c.example.com CNAME a.example.com  
+a-d.example.com CNAME a.example.com  
+b-c.example.com CNAME b.example.com  
+b-d.example.com CNAME b.example.com
+</code></pre></div><p>然后我们需要在落地主机上部署所有目标路径的证书<br>
+由于解析记录和主机 IP 不符，HTTP 验证无法通过。这里建议使用 DNS 验证方式签发证书。<br>
+具体 DNS 验证插件需要根据您的域名 DNS 解析托管商选择，这里使用了 AWS Route 53。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">certbot certonly --dns-route53 -d a-c.example.com -d b-c.example.com // 主机 C 上
+certbot certonly --dns-route53 -d a-d.example.com -d b-d.example.com // 主机 D 上
+</code></pre></div><h3 id="配置-sni-代理">配置 SNI 代理</h3>
+<p>这里我们使用 nginx 的 ssl_preread 模块实现 SNI 代理。<br>
+请安装 nginx 后按如下方法修过 nginx.conf 文件。<br>
+注意这里不是 HTTP 服务，请不要写在虚拟主机的配置中。</p>
+<p>这里给出主机 A 上的对应配置，主机 B 同理。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">stream</span> {
+  <span style="color:#f92672">map</span> $ssl_preread_server_name $name {
+    <span style="color:#f92672">a-c.example.com</span>   <span style="color:#e6db74">c.example.com</span>;  <span style="color:#75715e"># 将 a-c 路径流量转发至主机 C
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">a-d.example.com</span>   <span style="color:#e6db74">d.example.com</span>;  <span style="color:#75715e"># 将 a-d 路径流量转发至主机 D
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e"># 如果此主机上需要配置其他占用 443 端口的服务 （例如 web 服务和 Trojan 服务）
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># 请使那些服务监听在其他本地端口（这里使用了 4000）
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># 所有不匹配上方 SNI 的 TLS 请求都会转发至此端口，如不需要可以删除此行
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">default</span>           localhost:<span style="color:#ae81ff">4000</span>;
+  }
+
+  <span style="color:#f92672">server</span> {
+    <span style="color:#f92672">listen</span>      <span style="color:#ae81ff">443</span>; <span style="color:#75715e"># 监听 443 端口
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">proxy_pass</span>  $name;
+    <span style="color:#f92672">ssl_preread</span> <span style="color:#66d9ef">on</span>;
+  }
+}
+</code></pre></div><h3 id="配置落地-trojan-服务">配置落地 Trojan 服务</h3>
+<p>在之前的配置中我们使用了一个证书签发了所有目标路径的域名，所以这里我们可以使用一个 Trojan 服务端处理所有目标路径的请求。<br>
+Trojan 的配置和通常配置方法无异，这里还是提供一份例子。无关的配置已省略。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;run_type&#34;</span>: <span style="color:#e6db74">&#34;server&#34;</span>,
+    <span style="color:#f92672">&#34;local_addr&#34;</span>: <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;local_port&#34;</span>: <span style="color:#ae81ff">443</span>,
+    <span style="color:#f92672">&#34;ssl&#34;</span>: {
+        <span style="color:#f92672">&#34;cert&#34;</span>: <span style="color:#e6db74">&#34;/path/to/certificate.crt&#34;</span>,
+        <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;/path/to/private.key&#34;</span>,
+    }
+    <span style="color:#960050;background-color:#1e0010">...</span>
+}
+</code></pre></div><p>小提示：如果需要在落地主机上对不同路径分别使用独立的 Trojan 服务端（比如需要分别接入各自的计费服务），可以在落地机上再配置一个 SNI 代理，并分别转发至本地不同的 Trojan 服务端监听端口。由于配置与前面所提到的过程基本相同，这里便不再赘述。</p>
+<h2 id="总结">总结</h2>
+<p>通过以上介绍的配置方法，我们可以在单一端口上实现多入口多出口多级中继的 Trojan 流量转发。<br>
+对于多级中继，只需在中间节点上按相同思路配置 SNI 代理即可。</p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/trojan-go/zh/advance/forward/" title="隧道和反向代理"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/trojan-go/zh/advance/plugin/" title="使用Shadowsocks插件/可插拔传输层" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/trojan-go/js/clipboard.min.js?1789530367"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.min.js?1789530367"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.jquery.min.js?1789530367"></script>
+    <script src="/trojan-go/js/jquery.sticky.js?1789530367"></script>
+    <script src="/trojan-go/js/featherlight.min.js?1789530367"></script>
+    <script src="/trojan-go/js/highlight.pack.js?1789530367"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/trojan-go/js/modernizr.custom-3.6.0.js?1789530367"></script>
+    <script src="/trojan-go/js/learn.js?1789530367"></script>
+    <script src="/trojan-go/js/hugo-learn.js?1789530367"></script>
+    
+        
+            <script src="/trojan-go/mermaid/mermaid.js?1789530367"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

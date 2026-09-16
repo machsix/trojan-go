@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="zh" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.83.1" />
+    <meta name="description" content="An unidentifiable mechanism that helps you bypass GFW.">
+
+
+    <link rel="icon" href="/trojan-go/images/favicon.png" type="image/png">
+
+    <title>URL方案（草案） :: Trojan-Go 文档</title>
+
+    
+    <link href="/trojan-go/css/nucleus.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/fontawesome-all.min.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/hybrid.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/featherlight.min.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/perfect-scrollbar.min.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/auto-complete.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/atom-one-dark-reasonable.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/theme.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/tabs.css?1789530367" rel="stylesheet">
+    <link href="/trojan-go/css/hugo-theme.css?1789530367" rel="stylesheet">
+    
+    
+
+    <script src="/trojan-go/js/jquery-3.3.1.min.js?1789530367"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/trojan-go/zh/developer/url/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/' aria-label="Trojan-Go documentation home">
+  <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="trojan-go-logo-title" style="width: 100%; height: 100%;">
+    <title id="trojan-go-logo-title">trojan-go</title>
+    <text x="160" y="53" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" letter-spacing="-1.5">trojan-go</text>
+  </svg>
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="搜索...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/trojan-go/js/lunr.min.js?1789530367"></script>
+<script type="text/javascript" src="/trojan-go/js/auto-complete.js?1789530367"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/machsix.github.io\/trojan-go\/\/zh";
+    
+</script>
+<script type="text/javascript" src="/trojan-go/js/search.js?1789530367"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='/'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/trojan-go/zh/basic/" title="基本配置" class="dd-item
+        
+        
+        parent
+        ">
+      <a href="/trojan-go/zh/basic/">
+          基本配置
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/basic/trojan/" title="Trojan基本原理" class="dd-item ">
+        <a href="/trojan-go/zh/basic/trojan/">
+        Trojan基本原理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/basic/config/" title="正确配置Trojan-Go" class="dd-item ">
+        <a href="/trojan-go/zh/basic/config/">
+        正确配置Trojan-Go
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/basic/full-config/" title="完整的配置文件" class="dd-item ">
+        <a href="/trojan-go/zh/basic/full-config/">
+        完整的配置文件
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/trojan-go/zh/advance/" title="高级配置" class="dd-item
+        
+        
+        parent
+        ">
+      <a href="/trojan-go/zh/advance/">
+          高级配置
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/mux/" title="启用多路复用提升网络并发性能" class="dd-item ">
+        <a href="/trojan-go/zh/advance/mux/">
+        启用多路复用提升网络并发性能
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/websocket/" title="使用Websocket进行CDN转发和抵抗中间人攻击" class="dd-item ">
+        <a href="/trojan-go/zh/advance/websocket/">
+        使用Websocket进行CDN转发和抵抗中间人攻击
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/router/" title="国内直连和广告屏蔽" class="dd-item ">
+        <a href="/trojan-go/zh/advance/router/">
+        国内直连和广告屏蔽
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/forward/" title="隧道和反向代理" class="dd-item ">
+        <a href="/trojan-go/zh/advance/forward/">
+        隧道和反向代理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/nginx-relay/" title="一种基于SNI代理的多路径分流中继方案" class="dd-item ">
+        <a href="/trojan-go/zh/advance/nginx-relay/">
+        一种基于SNI代理的多路径分流中继方案
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/plugin/" title="使用Shadowsocks插件/可插拔传输层" class="dd-item ">
+        <a href="/trojan-go/zh/advance/plugin/">
+        使用Shadowsocks插件/可插拔传输层
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/aead/" title="使用Shadowsocks AEAD进行二次加密" class="dd-item ">
+        <a href="/trojan-go/zh/advance/aead/">
+        使用Shadowsocks AEAD进行二次加密
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/customize-protocol-stack/" title="自定义协议栈" class="dd-item ">
+        <a href="/trojan-go/zh/advance/customize-protocol-stack/">
+        自定义协议栈
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/api/" title="使用API动态管理用户" class="dd-item ">
+        <a href="/trojan-go/zh/advance/api/">
+        使用API动态管理用户
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/advance/nat/" title="透明代理" class="dd-item ">
+        <a href="/trojan-go/zh/advance/nat/">
+        透明代理
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/trojan-go/zh/developer/" title="实现细节和开发指南" class="dd-item
+        parent
+        
+        parent
+        ">
+      <a href="/trojan-go/zh/developer/">
+          实现细节和开发指南
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/overview/" title="基本介绍" class="dd-item ">
+        <a href="/trojan-go/zh/developer/overview/">
+        基本介绍
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/build/" title="编译和自定义Trojan-Go" class="dd-item ">
+        <a href="/trojan-go/zh/developer/build/">
+        编译和自定义Trojan-Go
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/trojan/" title="Trojan协议" class="dd-item ">
+        <a href="/trojan-go/zh/developer/trojan/">
+        Trojan协议
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/mux/" title="多路复用" class="dd-item ">
+        <a href="/trojan-go/zh/developer/mux/">
+        多路复用
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/websocket/" title="Websocket" class="dd-item ">
+        <a href="/trojan-go/zh/developer/websocket/">
+        Websocket
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/simplesocks/" title="SimpleSocks协议" class="dd-item ">
+        <a href="/trojan-go/zh/developer/simplesocks/">
+        SimpleSocks协议
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/api/" title="API开发" class="dd-item ">
+        <a href="/trojan-go/zh/developer/api/">
+        API开发
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/plugin/" title="可插拔传输层插件开发" class="dd-item ">
+        <a href="/trojan-go/zh/developer/plugin/">
+        可插拔传输层插件开发
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/trojan-go/zh/developer/url/" title="URL方案（草案）" class="dd-item active">
+        <a href="/trojan-go/zh/developer/url/">
+        URL方案（草案）
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://machsix.github.io/trojan-go/en/developer/url/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="zh" value="https://machsix.github.io/trojan-go/zh/developer/url/" selected>简体中文</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/trojan-go/zh/'>简介</a> > <a href='/trojan-go/zh/developer/'>实现细节和开发指南</a> > URL方案（草案）
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#changelog">Changelog</a></li>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#格式">格式</a></li>
+    <li><a href="#详述">详述</a>
+      <ul>
+        <li><a href="#trojan-password"><code>trojan-password</code></a></li>
+        <li><a href="#trojan-host"><code>trojan-host</code></a></li>
+        <li><a href="#port"><code>port</code></a></li>
+        <li><a href="#tls或allowinsecure"><code>tls</code>或<code>allowInsecure</code></a></li>
+        <li><a href="#sni"><code>sni</code></a></li>
+        <li><a href="#type"><code>type</code></a></li>
+        <li><a href="#host"><code>host</code></a></li>
+        <li><a href="#path"><code>path</code></a></li>
+        <li><a href="#mux"><code>mux</code></a></li>
+        <li><a href="#encryption"><code>encryption</code></a></li>
+        <li><a href="#plugin"><code>plugin</code></a></li>
+        <li><a href="#url-fragment--后内容">URL Fragment (# 后内容)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              URL方案（草案）
+            </h1>
+          
+
+        
+
+
+<h2 id="changelog">Changelog</h2>
+<ul>
+<li>encryption 格式修改为 ss;method:password</li>
+</ul>
+<h2 id="概述">概述</h2>
+<p>感谢 @DuckSoft @StudentMain @phlinhng 对 Trojan-Go URL 方案的讨论和贡献。<strong>目前 URL 方案为草案，需要更多的实践和讨论。</strong></p>
+<p>Trojan-Go<strong>客户端</strong>可以接受URL，以定位服务器资源。原则如下:</p>
+<ul>
+<li>
+<p>遵守 URL 格式规范</p>
+</li>
+<li>
+<p>保证人类可读，对机器友好</p>
+</li>
+<li>
+<p>URL 的作用，是定位 Trojan-Go 节点资源，方便资源分享</p>
+</li>
+</ul>
+<p>需要注意，基于人类可读性的考虑，禁止将 base64 等编码数据嵌入 URL 中。首先， base64 编码不能保证传输安全，其意义在于在 ASCII 信道传输非 ASCII 数据。其次，如果需要保证分享 URL 时的传输安全，请对明文 URL 进行加密，而不是修改 URL 格式。</p>
+<h2 id="格式">格式</h2>
+<p>基本格式如下，<code>$()</code> 代表此处需要 <code>encodeURIComponent</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">trojan-go://
+    $(trojan-password)
+    @
+    trojan-host
+    :
+    port
+/?
+    sni=$(tls-sni.com)&amp;
+    type=$(original|ws|h2|h2+ws)&amp;
+        host=$(websocket-host.com)&amp;
+        path=$(/websocket/path)&amp;
+    encryption=$(ss;aes-256-gcm;ss-password)&amp;
+    plugin=$(...)
+#$(descriptive-text)
+</code></pre></div><p>例如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">trojan-go://password1234@google.com/?sni=microsoft.com&amp;type=ws&amp;host=youtube.com&amp;path=%2Fgo&amp;encryption=ss%3Baes-256-gcm%3Afuckgfw
+</code></pre></div><p>由于 Trojan-Go 兼容 Trojan，所以对于 Trojan 的 URL 方案</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">trojan://password@remote_host:remote_port
+</code></pre></div><p>可以兼容接受。它等价于</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">trojan-go://password@remote_host:remote_port
+</code></pre></div><p>需要注意的是，一旦服务器使用了非Trojan兼容的功能，必须使用<code>trojan-go://</code>定位服务器。这样设计的目的是使得 Trojan-Go 的 URL 不会被 Trojan 错误接受，避免污染 Trojan 用户的 URL 分享。同时，Trojan-Go 确保可以兼容接受 Trojan 的 URL。</p>
+<h2 id="详述">详述</h2>
+<p>注意：所有参数名和常数字符串均区分大小写。</p>
+<h3 id="trojan-password"><code>trojan-password</code></h3>
+<p>Trojan 的密码。
+不可省略，不能为空字符串，不建议含有非 ASCII 可打印字符。
+必须使用 <code>encodeURIComponent</code> 编码。</p>
+<h3 id="trojan-host"><code>trojan-host</code></h3>
+<p>节点 IP / 域名。
+不可省略，不能为空字符串。
+IPv6 地址必须扩方括号。
+IDN 域名（如“百度.cn”）必须使用 <code>xn--xxxxxx</code> 格式。</p>
+<h3 id="port"><code>port</code></h3>
+<p>节点端口。
+省略时默认为 <code>443</code>。
+必须取 <code>[1,65535]</code> 中的整数。</p>
+<h3 id="tls或allowinsecure"><code>tls</code>或<code>allowInsecure</code></h3>
+<p>没有这个字段。
+TLS 默认一直启用，除非有传输插件禁用它。
+TLS 认证必须开启。无法使用根CA校验服务器身份的节点，不适合分享。</p>
+<h3 id="sni"><code>sni</code></h3>
+<p>自定义 TLS 的 SNI。
+省略时默认与 <code>trojan-host</code> 同值。不得为空字符串。</p>
+<p>必须使用 <code>encodeURIComponent</code> 编码。</p>
+<h3 id="type"><code>type</code></h3>
+<p>传输类型。
+省略时默认为 <code>original</code>，但不可为空字符串。
+目前可选值只有 <code>original</code> 和 <code>ws</code>，未来可能会有 <code>h2</code>、<code>h2+ws</code> 等取值。</p>
+<p>当取值为 <code>original</code> 时，使用原始 Trojan 传输方式，无法方便通过 CDN。
+当取值为 <code>ws</code> 时，使用 Websocket over TLS 传输。</p>
+<h3 id="host"><code>host</code></h3>
+<p>自定义 HTTP <code>Host</code> 头。
+可以省略，省略时值同 <code>trojan-host</code>。
+可以为空字符串，但可能带来非预期情形。</p>
+<p>警告：若你的端口非标准端口（不是 80 / 443），RFC 标准规定 <code>Host</code> 应在主机名后附上端口号，例如 <code>example.com:44333</code>。至于是否遵守，请自行斟酌。</p>
+<p>必须使用 <code>encodeURIComponent</code> 编码。</p>
+<h3 id="path"><code>path</code></h3>
+<p>当传输类型 <code>type</code> 取 <code>ws</code>、<code>h2</code>、<code>h2+ws</code> 时，此项有效。
+不可省略，不可为空。
+必须以 <code>/</code> 开头。
+可以使用 URL 中的 <code>&amp;</code> <code>#</code> <code>?</code> 等字符，但应当是合法的 URL 路径。</p>
+<p>必须使用 <code>encodeURIComponent</code> 编码。</p>
+<h3 id="mux"><code>mux</code></h3>
+<p>没有这个字段。
+当前服务器默认一直支持 <code>mux</code>。
+启用 <code>mux</code> 与否各有利弊，应由客户端决定自己是否启用。URL的作用，是定位服务器资源，而不是规定用户使用偏好。</p>
+<h3 id="encryption"><code>encryption</code></h3>
+<p>用于保证 Trojan 流量密码学安全的加密层。
+可省略，默认为 <code>none</code>，即不使用加密。
+不可以为空字符串。</p>
+<p>必须使用 encodeURIComponent 编码。</p>
+<p>使用 Shadowsocks 算法进行流量加密时，其格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">ss;method:password
+</code></pre></div><p>其中 ss 是固定内容，method 是加密方法，必须为下列之一：</p>
+<ul>
+<li><code>aes-128-gcm</code></li>
+<li><code>aes-256-gcm</code></li>
+<li><code>chacha20-ietf-poly1305</code></li>
+</ul>
+<p>其中的 <code>password</code> 是 Shadowsocks 的密码，不得为空字符串。
+<code>password</code> 中若包含分号，不需要进行转义。
+<code>password</code> 应为英文可打印 ASCII 字符。</p>
+<p>其他加密方案待定。</p>
+<h3 id="plugin"><code>plugin</code></h3>
+<p>额外的插件选项。本字段保留。
+可省略，但不可以为空字符串。</p>
+<h3 id="url-fragment--后内容">URL Fragment (# 后内容)</h3>
+<p>节点说明。
+不建议省略，不建议为空字符串。</p>
+<p>必须使用 <code>encodeURIComponent</code> 编码。</p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/trojan-go/zh/developer/plugin/" title="可插拔传输层插件开发"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/trojan-go/zh/developer/overview/" title="基本介绍" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/trojan-go/js/clipboard.min.js?1789530367"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.min.js?1789530367"></script>
+    <script src="/trojan-go/js/perfect-scrollbar.jquery.min.js?1789530367"></script>
+    <script src="/trojan-go/js/jquery.sticky.js?1789530367"></script>
+    <script src="/trojan-go/js/featherlight.min.js?1789530367"></script>
+    <script src="/trojan-go/js/highlight.pack.js?1789530367"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/trojan-go/js/modernizr.custom-3.6.0.js?1789530367"></script>
+    <script src="/trojan-go/js/learn.js?1789530367"></script>
+    <script src="/trojan-go/js/hugo-learn.js?1789530367"></script>
+    
+        
+            <script src="/trojan-go/mermaid/mermaid.js?1789530367"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+
